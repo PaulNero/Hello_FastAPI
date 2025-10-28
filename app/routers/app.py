@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from .. import users, items 
+from .. import users, items, async_example
 
 # Создаём экземпляр FastAPI
 app = FastAPI(
@@ -16,6 +16,7 @@ app = FastAPI(
 
 app.include_router(users.router)
 app.include_router(items.router)
+app.include_router(async_example.router)
 
 # Определяем эндпоинт для GET запроса по корневому URL
 @app.get("/",

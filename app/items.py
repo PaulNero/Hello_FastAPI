@@ -2,6 +2,8 @@ from fastapi import HTTPException, Query
 from typing import Optional, List
 
 from fastapi import APIRouter, HTTPException
+from .schemas.schemas import Item
+import asyncio
 
 router = APIRouter() 
 
@@ -10,6 +12,12 @@ db = {
     1: {'name': 'Banana', 'is_available': False},
     2: {'name': 'Orange', 'is_available': True}
 }
+
+@router.post('/items',
+            summary='Создание сущности')
+async def add_item(item: Item):
+    db.append(item)
+    return {'response': 'success'}
 
 @router.get('/items',
         summary='Получение списка сущностей')
