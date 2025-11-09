@@ -1,0 +1,32 @@
+import pytest_asyncio
+from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
+from app.schemas.database import Base
+
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+user = os.getenv('POSTGRES_USER')
+password = os.getenv('POSTGRES_PASSWORD')
+host = os.getenv('POSTGRES_HOST')
+name = os.getenv('POSTGRES_NAME')
+port = os.getenv('POSTGRES_PORT')
+
+# driver => engine => session maker => session
+
+# URL подключения для PostgreSQL с драйвером asyncpg
+ASYNC_DB_URL = f"postgresql+psycopg://{user}:{password}@{host}:{port}/{name}"
+
+@pytest_asyncio.fixture
+async def async_session():
+    engine = create_async_engine(ASYNC_DB_URL)
+    async with engine.begin() as connect:
+        await connect.run_sync(Base.metadata.create_all) # Создаём таблицы
+    
+    TestingSessionLocal = async_sessionmaker(engine, expire_on_commit=False)
+    async with TestingSessionLocal() as session:
+        yield session # Передаём сессию в тест
+
+    async with engine.begin() as connect:
+        await connect.run_sync(Base.metadata.drop_all) # Удаляем таблицы

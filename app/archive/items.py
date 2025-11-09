@@ -2,7 +2,7 @@ from fastapi import HTTPException, Query
 from typing import Optional, List
 
 from fastapi import APIRouter, HTTPException
-from .schemas.schemas import Item
+from ..schemas.users import Item
 import asyncio
 
 router = APIRouter() 
