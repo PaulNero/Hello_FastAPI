@@ -1,26 +1,20 @@
 from fastapi import APIRouter, HTTPException, Depends
 from typing import List
-from .schemas.schemas import User, oauth2_scheme
+from ..schemas.users import User, oauth2_scheme, users
 from .auth import get_current_user
 
 
 router = APIRouter() 
 
-users = {
-    1: {'id': 1, 'username': "test 1", 'email': 'test1@test.test', "password": "hash1"},
-    2: {'id': 2, 'username': "test 2", 'email': 'test2@test.test', "password": "hash2"},
-    3: {'id': 3, 'username': "test 3", 'email': 'test3@test.test', "password": "hash3"}
-}
-
-@router.post('/users/me')
+@router.post('/a/users/me')
 async def read_users_me(user: User=Depends(get_current_user)):
-    return {'token': token}
+    return {'data': user}
 
-@router.post('/users')
+@router.post('/a/users')
 async def create_user(user: User):
     return {'username': user.username, "email": user.email}
 
-@router.get('/users', 
+@router.get('/a/users', 
             response_model=List[User], 
             summary='Просмотр информации о пользователе')
 
@@ -31,7 +25,7 @@ def get_users():
     #         for user in users.values()
     #         ]
 
-@router.get('/users/{user_id}', 
+@router.get('/a/users/{user_id}', 
             response_model=User,
             summary='Получение информации о пользователе')
 def get_user(user_id: int):
