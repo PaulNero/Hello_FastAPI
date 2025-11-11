@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from ..archive import _users, items, async_example, auth
 from ..routers import users, posts
-from ..schemas.database import engine, Base
+from .app.db.database import engine, Base
 import logging
 
 logger = logging.getLogger(__name__)
@@ -29,9 +29,11 @@ app.include_router(posts.router)
 
 @app.on_event("startup")
 async def startup():
-    async with engine.begin() as connect:
-        await connect.run_sync(Base.metadata.create_all)
-    logger.info("Все таблицы созданы (или уже существовали)")
+    # Отключено из за подключения алембика
+    # async with engine.begin() as connect:
+    #     await connect.run_sync(Base.metadata.create_all)
+    # logger.info("Все таблицы созданы (или уже существовали)")
+    pass
 
 
 @app.on_event("shutdown")

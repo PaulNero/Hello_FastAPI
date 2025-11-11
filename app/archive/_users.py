@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, Depends
 from typing import List
-from ..schemas.users import User, oauth2_scheme, users
+from .app.db.users import User, oauth2_scheme, users
 from .auth import get_current_user
 
 

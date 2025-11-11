@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
-from app.schemas.database import DBSession
+from app.db.database import DBSession
 from sqlalchemy.exc import IntegrityError
-from app.schemas.posts import PostIn
+from app.db.posts import PostIn
 from app.crud import posts
 
 router = APIRouter()

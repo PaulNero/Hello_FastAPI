@@ -4,6 +4,6 @@
 .env
 .vscode
 
-app/routers/__pycache__/__init__.cpython-312.pyc
-app/routers/__pycache__/app.cpython-312.pyc
-app/schemas/__pycache__/schemas.cpython-312.pyc
+*/routers/__pycache__/__init__.cpython-312.pyc
+*/routers/__pycache__/app.cpython-312.pyc
+*/schemas/__pycache__/schemas.cpython-312.pyc

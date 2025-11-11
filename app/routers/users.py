@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
-from app.schemas.database import DBSession
+from app.db.database import DBSession
 from sqlalchemy.exc import IntegrityError
-from app.schemas.users import UserIn
+from app.db.users import UserIn
 from app.crud import users
 from app.crud.posts import get_post_by_author_id
 

@@ -1,6 +1,6 @@
 import pytest
 from sqlalchemy import select
-from app.schemas.models import User
+from app.db.models import User
 
 @pytest.mark.asyncio # Маркер асинхронного теста
 async def test_create_user(async_session):

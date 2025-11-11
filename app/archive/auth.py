@@ -6,7 +6,7 @@ from fastapi.security import OAuth2PasswordRequestForm
 from http.client import HTTPException
 from starlette import status
 from datetime import datetime, timedelta, timezone
-from ..schemas.users import oauth2_scheme, User, fake_db
+from .app.db.users import oauth2_scheme, User, fake_db
 
 from dotenv import load_dotenv
 import os

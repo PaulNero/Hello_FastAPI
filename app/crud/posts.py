@@ -2,7 +2,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import List
 
-from app.schemas.models import Post
+from app.db.models import Post
 
 async def create_post(session: AsyncSession, title: str, content: str, author_id: int) -> Post:
     new_post = Post(title=title, content=content, author_id=author_id)

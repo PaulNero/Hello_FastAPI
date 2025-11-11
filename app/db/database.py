@@ -16,7 +16,7 @@ port = os.getenv('POSTGRES_PORT')
 # driver => engine => session maker => session
 
 # URL подключения для PostgreSQL с драйвером asyncpg
-DATABASE_URL = f"postgresql+psycopg://{user}:{password}@{host}:{port}/{name}"
+DATABASE_URL = f"postgresql+asyncpg://{user}:{password}@{host}:{port}/{name}"
 
 # Создаём асинхронный движок
 engine = create_async_engine(DATABASE_URL, echo=True, future=True, pool_size=10, max_overflow=20)
@@ -30,9 +30,3 @@ async def get_async_session() -> AsyncSession:
         yield session
         
 DBSession = Annotated[AsyncSession, Depends(get_async_session)]
-
-
-
-# Базовый класс для всех моделей
-class Base(DeclarativeBase):
-    pass
